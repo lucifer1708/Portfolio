@@ -31,7 +31,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'donloder',
     'routes',
+    'crispy_forms',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -75,12 +77,12 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -150,4 +152,18 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
         {"name": "Home", "url": "/", "new_window": True},
     ],
+}
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sumit',
+        'USER': 'sumit',
+        'PASSWORD': 'sd565211',
+        'HOST': 'postgresql-sumit.alwaysdata.net',
+        'PORT': '5432',
+    }
 }

@@ -1,0 +1,84 @@
+{% extends 'ytdl/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+ <div class="hero mt-10 bg-base-700" >
+    <div class="text-center ">
+      <!-- <div class="max-w-md"> -->
+        <h1 class="mb-5 text-5xl font-bold">
+          Youtube Downloader
+        </h1>
+
+
+
+        <form action="{% url 'download' %}" method="post">
+          {% csrf_token %}
+          <center>
+          {{ form|crispy }}
+          </center>
+          <button type="submit" value="Download" class="btn btn-outline btn-accent" style="margin-top: 40px;">Download</button>
+        </form>
+
+    </div>
+  </div>
+  
+ {% if title %}
+ <br>
+  <div class="divider"></div>
+ <center>
+  <div class="col-md-4 ml-auto mr-auto mt-10">
+  <img class="img-responsive" src="{{ thumb }}">
+  </div> 
+    <h1 style="font-size:30px;" class=" mt-10 text-center">{{ title }}</h1>
+ </center>
+ <div class="divider"></div>
+<div class="stats shadow-xl" style="width:100vw;">
+  
+  <div class="stat place-items-center">
+    <div class="stat-title">Likes</div>
+    <div class="stat-value">{{likes}}</div>
+  </div>
+  
+  <div class="stat place-items-center">
+    <div class="stat-title">Views</div>
+    <div class="stat-value text-secondary">{{views}}</div>
+  </div>
+  
+  <div class="stat place-items-center">
+    <div class="stat-title">Duration</div>
+    <div class="stat-value">{{duration}} min</div>
+  </div>
+  
+</div>
+
+
+<div class="overflow-x-auto min-h-screen shadow-xl">
+  <table class="table table-zebra w-full">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th style="font-size:20px" class="text-accent">Resolution</th>
+        <th style="font-size:20px" class="text-accent">File Size</th>
+        <th style="font-size:20px" class="text-accent">Extension</th>
+        <th style="font-size:20px" class="text-accent">Download</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for stream in streams %}
+           <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>{{ stream.resolution }}</th>
+        <td>{{ stream.file_size}}</td>
+        <td>{{ stream.extension}}</td>
+        <td><a href="{{ stream.video_url }}" class="btn btn-outline btn-accent" download="{{ title }}.{{ extension }}" target="_blank" >Download </a></td>
+      </tr>
+{% endfor %}
+    </tbody>
+  </table>
+</div>
+    {% endif %}
+  {% endblock %}

@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 from django.conf import settings
+from donloder.views import download
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('routes.urls')),
+    path('ytdl/', download, name='download'),
 ]
